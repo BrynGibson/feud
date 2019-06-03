@@ -1,0 +1,7 @@
+C:\Users\SlinkyMalinki\Desktop\familygame\fued\fued\bin\Debug\fued.exe.config
+C:\Users\SlinkyMalinki\Desktop\familygame\fued\fued\bin\Debug\fued.exe
+C:\Users\SlinkyMalinki\Desktop\familygame\fued\fued\bin\Debug\fued.pdb
+C:\Users\SlinkyMalinki\Desktop\familygame\fued\fued\obj\Debug\fued.csprojAssemblyReference.cache
+C:\Users\SlinkyMalinki\Desktop\familygame\fued\fued\obj\Debug\fued.csproj.CoreCompileInputs.cache
+C:\Users\SlinkyMalinki\Desktop\familygame\fued\fued\obj\Debug\fued.exe
+C:\Users\SlinkyMalinki\Desktop\familygame\fued\fued\obj\Debug\fued.pdb

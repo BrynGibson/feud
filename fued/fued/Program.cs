@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Threading;
 
 namespace fued
 {
@@ -25,21 +26,31 @@ namespace fued
             Contestant[] contestants = new Contestant[43];
 
             Read(contestants);
-            //Sort(contestants);
+            Sort(contestants);
+            Menu(contestants);
             //Print(contestants);
-            Finalists(contestants);
+            //Finalists(contestants);
             Console.ReadLine();
 
         }
 
         public static void Menu(Contestant[] contestants)
         {
+            Console.Clear();
             int x;
-            Console.WriteLine("1   Print contestants \n");
+            Console.WriteLine("1   Print contestant details \n2   Change contestants intrests\n3   Play Family Feud!");
             x = Convert.ToInt32(Console.ReadLine());
             switch (x)
             {
                 case 1: Print(contestants);
+                    break;
+                case 2: Edit(contestants);
+                    break;
+                case 3: Finalists(contestants);
+                    break;
+                default: Console.WriteLine("Command not recognized! Please enter the corresponding value to the option you would like to choose.\n\n Enter to return to menu...");
+                    Console.ReadLine();
+                    Menu(contestants);
                     break;
             }
 
@@ -52,11 +63,23 @@ namespace fued
             int change;
             string newintrest;
 
-            Console.WriteLine("Please Enter the contestant number of the contestant you would like to update the intrest feild for");
+            Console.Clear();
+            Console.WriteLine("Current contestant details...\n");
+
+            for (int i = 0; i < 43; i++)
+            {
+                Console.WriteLine("First name: " + contestants[i].firstName);
+                Console.WriteLine("Last name: " + contestants[i].lastName);
+                Console.WriteLine("Intrest: " + contestants[i].intrest);
+                Console.WriteLine("Contestant number: " + contestants[i].number);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Please enter the contestant number of the contestant you would like to update the intrest feild for");
             change = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
 
-            Console.WriteLine("Please enter the new intrest");
+            Console.WriteLine("\nPlease enter the new intrest");
             newintrest = Console.ReadLine();
 
             for (int i = 0; i < 43; i++)
@@ -66,7 +89,7 @@ namespace fued
                     contestants[i].intrest = newintrest;
 
                     Console.Clear();
-                    Console.WriteLine("Updated. Press enter to continue");
+                    Console.WriteLine("\nUpdated. Press enter to continue");
                     Console.ReadLine();
                     Console.Clear();
                     
@@ -122,6 +145,9 @@ namespace fued
 
         public static void Print(Contestant[] contestants)
         {
+            Console.Clear();
+            Console.WriteLine("Contestant details...\n");
+
             for (int i = 0; i < 43; i++)
             {
                 Console.WriteLine("First name: " + contestants[i].firstName);
@@ -130,28 +156,37 @@ namespace fued
                 Console.WriteLine("Contestant number: " + contestants[i].number);
                 Console.WriteLine();
             }
+            Console.WriteLine("Enter to continue...");
+            Console.ReadLine();
+
+            Menu(contestants);
         }
 
-        public static void Finalists(Contestant[] contestants)
+        public static Contestant Finalists(Contestant[] contestants)
         {
+            Contestant finalist;
             Random rand = new Random();
             int[] finalists = new int[10];
-            int temp, place1, place2;
+            int temp, place1, place2, ifinalist;
 
             int[] potfinalists = new int[43];
 
-            for(int x = 0; x < 43; x++)
-            {
-                potfinalists[x] = x + 1;
-            }
-            
-            
+            Console.WriteLine("Choosing finalists! ...");
+            Thread.Sleep(2000);
 
-            for(int i = 0; i < 1000; i++)
+            for (int x = 0; x < 43; x++)
+            {
+                potfinalists[x] = x;
+            }
+
+
+
+            for (int i = 0; i < 1000; i++)
             {
                 place1 = rand.Next(0, 43);
                 place2 = rand.Next(0, 43);
-                if(place1 != place2)
+
+                if (place1 != place2)
                 {
                     temp = potfinalists[place1];
                     potfinalists[place1] = potfinalists[place2];
@@ -159,36 +194,39 @@ namespace fued
                 }
 
             }
-           
 
-            for(int u = 0; u < 10; u++)
+
+            for (int u = 0; u < 10; u++)
             {
                 finalists[u] = potfinalists[u];
             }
 
-            for (int t = 0; t < 10; t++)
+            Console.Clear();
+            Console.WriteLine("The finalists are ....\n");
+
+            for(int g = 0; g < 10; g++)
             {
-                Console.WriteLine(finalists[t]);
+                Console.WriteLine(contestants[finalists[g]].firstName + " " + contestants[finalists[g]].lastName);
+
             }
-                    
+
+            Console.WriteLine("\nOnly one of these will make it to the grand final!");
+            Console.WriteLine("\nPress enter to continue...");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("And the grand finalist is...\n");
+            Thread.Sleep(2000);
+            Console.WriteLine("...\n");
+            Thread.Sleep(2000);
+        
+
+            ifinalist = finalists[rand.Next(0, 10)];
+            finalist = contestants[ifinalist];
+
+            Console.WriteLine(finalist.firstName + " " + finalist.lastName);
+            return finalist;
 
 
-
-
-
-            //finalists[1] = rand.Next(1, 44);
-
-                //for(int i = 1; i < 10; i++)
-                //{
-                //    temp = rand.Next(1, 44);
-                //    foreach( int item in finalists)
-                //    {
-                //        if(temp == finalists[i])
-                //        {
-
-                //        }
-                //    }
-                //}
-            }
+        }   
     }
 }
